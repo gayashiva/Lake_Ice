@@ -247,11 +247,11 @@ dfs2.columns = ['year', 'month','day','Tmax','Tmin','Prec','Prec-percent']
 dfs2=dfs2.reset_index()
 
 #Daily Temperature Ranges
-dfs1= dfs1.convert_objects(convert_numeric=True)
+dfs1= dfs1.apply(pd.to_numeric, errors='coerce')
 for index,row in dfs1.iterrows():
     dfs1.loc[index,'Trange']=dfs1.loc[index,['2','5','8','11','14','17','20','23']].max()-dfs1.loc[index,['2','5','8','11','14','17','20','23']].min()
 
-dfs2= dfs2.convert_objects(convert_numeric=True)
+dfs2= dfs2.apply(pd.to_numeric, errors='coerce')
 dfs2['Trange']=dfs2['Tmax']-dfs2['Tmin']
 
 k=0
